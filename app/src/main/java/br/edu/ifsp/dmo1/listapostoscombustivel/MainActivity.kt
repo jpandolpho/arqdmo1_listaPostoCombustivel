@@ -2,13 +2,16 @@ package br.edu.ifsp.dmo1.listapostoscombustivel
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import br.edu.ifsp.dmo1.listapostoscombustivel.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var dataSource: List<GasStation>
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         loadDataSource()
     }
