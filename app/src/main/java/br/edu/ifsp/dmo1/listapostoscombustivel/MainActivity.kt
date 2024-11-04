@@ -22,11 +22,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
     private fun configListview() {
-        val adapter: ArrayAdapter<GasStation> = ArrayAdapter(
-            this,
-            android.R.layout.simple_list_item_1,
-            dataSource
-        )
+        val adapter: GasStationAdapter = GasStationAdapter(this,dataSource)
         binding.gasStationListview.adapter = adapter
         binding.gasStationListview.onItemClickListener = this
     }
