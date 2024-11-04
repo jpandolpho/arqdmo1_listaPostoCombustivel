@@ -6,4 +6,7 @@ class GasStation(
     val gas: Double,
     val etha: Double) {
 
+    override fun toString(): String {
+        return "$name ->\n $address"
+    }
 }
