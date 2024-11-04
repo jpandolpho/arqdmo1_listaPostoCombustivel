@@ -1,10 +1,14 @@
 package br.edu.ifsp.dmo1.listapostoscombustivel
 
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.dmo1.listapostoscombustivel.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     private lateinit var dataSource: List<GasStation>
     private lateinit var binding: ActivityMainBinding
 
@@ -14,6 +18,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         loadDataSource()
+        configListview()
+    }
+
+    private fun configListview() {
+        val adapter: ArrayAdapter<GasStation> = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            dataSource
+        )
+        binding.gasStationListview.adapter = adapter
+        binding.gasStationListview.onItemClickListener = this
     }
 
     private fun loadDataSource() {
@@ -29,5 +44,14 @@ class MainActivity : AppCompatActivity() {
             add(GasStation("Monaco", "Expressa", 5.01, 3.01))
             add(GasStation("Pantanal(Shell)", "Fonte", 5.99, 4.19))
         }
+    }
+
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val gasStation = dataSource[position]
+        Toast.makeText(
+            this,
+            "Gasolina: R$ ${gasStation.gas}\nEtanol: R$ ${gasStation.etha}",
+            Toast.LENGTH_LONG
+        ).show()
     }
 }
